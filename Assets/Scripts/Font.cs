@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Font : MonoBehaviour
@@ -8,6 +9,10 @@ public class Font : MonoBehaviour
 
   public static Sprite GetSprite(char c)
   {
+    if (font == null)
+    {
+      font = Resources.LoadAll<Sprite>($"Images/font");
+    }
     return Instantiate(font[c]);
   }
 
