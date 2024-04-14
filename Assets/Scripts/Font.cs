@@ -22,3 +22,23 @@ public class Font : MonoBehaviour
     Debug.Log(font.Length);
   }
 }
+
+public class FontSmall : MonoBehaviour
+{
+  static Sprite[] font;
+
+  public static Sprite GetSprite(char c)
+  {
+    if (font == null)
+    {
+      font = Resources.LoadAll<Sprite>($"Images/font_small");
+    }
+    return Instantiate(font[c]);
+  }
+
+  void Start()
+  {
+    font = Resources.LoadAll<Sprite>($"Images/font_small");
+    Debug.Log(font.Length);
+  }
+}

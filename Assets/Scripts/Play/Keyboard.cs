@@ -32,8 +32,8 @@ public class Keyboard : MonoBehaviour
         GameObject c = Instantiate(Resources.Load<GameObject>("Prefabs/Key"), transform);
         c.GetComponent<Key>().SetChar(keys[i][j]);
         c.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>($"Images/key_{widths[i][j]}");
-        // TODO: 左上を基準点にする
-        c.transform.localPosition = new Vector3(currentX, -i * (height + 1) * Const.UNIT_PER_DOT, 0);
+        int dy = height * Const.UNIT_PER_DOT / 2, dx = widths[i][j] * Const.UNIT_PER_DOT / 2;
+        c.transform.localPosition = new Vector3(currentX + dx, -i * (height + 1) * Const.UNIT_PER_DOT + dy, 0);
         currentX += (widths[i][j] + 1) * Const.UNIT_PER_DOT;
       }
     }
