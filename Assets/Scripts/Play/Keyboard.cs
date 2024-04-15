@@ -23,7 +23,7 @@ public class Keyboard : MonoBehaviour
   };
 
   string[] keys_us = {
-    "~1234567890-=\b",
+    "`1234567890-=\b",
     "\tQWERTYUIOP[]\\",
     "\0ASDFGHJKL;'\n",
     "\0ZXCVBNM,./\0",
@@ -36,6 +36,15 @@ public class Keyboard : MonoBehaviour
     "\0ZXCVBNM,./\\\0",
     "\0\0\0\0\0\0\0\0\0\0"
   };
+
+  void ClearKeys()
+  {
+    foreach (Transform child in transform)
+    {
+      Destroy(child.gameObject);
+    }
+  }
+
   // Start is called before the first frame update
   void Start()
   {
@@ -54,6 +63,10 @@ public class Keyboard : MonoBehaviour
         int width = widths[i][j] == -1 ? 20 : widths[i][j];
         int dy = height * Const.UNIT_PER_DOT / 2, dx = width * Const.UNIT_PER_DOT / 2;
         c.transform.localPosition = new Vector3(currentX + dx, -i * (height + 1) * Const.UNIT_PER_DOT + dy, 0);
+        if (widths[i][j] == -1)
+        {
+          c.GetComponent<Key>().SetCharOffset(1, 3);
+        }
         currentX += (width + 1) * Const.UNIT_PER_DOT;
       }
     }
@@ -62,6 +75,12 @@ public class Keyboard : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-
+    // kari
+    if (Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.G) && Input.GetKey(KeyCode.K) && Input.GetKeyDown(KeyCode.B))
+    {
+      ClearKeys();
+      JISLayout = !JISLayout;
+      Start();
+    }
   }
 }
